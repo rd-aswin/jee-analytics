@@ -38,5 +38,5 @@ Ensure you have the following installed:
 
 1. **Clone the Repository**:
    ```bash
-   git clone [https://github.com/username/jee-analytics.git](https://github.com/rd-aswin/jee-analytics.git)
+   git clone https://github.com/username/jee-analytics.git](https://github.com/rd-aswin/jee-analytics.git
    cd jee-analytics
