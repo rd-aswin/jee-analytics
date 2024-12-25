@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { db } from '../Firebase/config'; // Import Firebase config
+import { collection, addDoc } from 'firebase/firestore'; // Firestore methods
 
 const TestDataEntryForm = () => {
     const [testType, setTestType] = useState("");
@@ -7,6 +9,7 @@ const TestDataEntryForm = () => {
     const [wrongAnswers, setWrongAnswers] = useState("");
     const [partialAnswers, setPartialAnswers] = useState("");
     const [skippedQuestions, setSkippedQuestions] = useState("");
+    const [marksSecured, setMarksSecured] = useState(""); // State for Marks Secured
 
     // Marks based on test type
     const testTypes = {
@@ -23,18 +26,27 @@ const TestDataEntryForm = () => {
         setTotalMarks(testTypes[selectedTestType] || "");
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
         const data = {
             testType,
             totalMarks,
             correctAnswers,
             wrongAnswers,
             partialAnswers,
-            skippedQuestions
+            skippedQuestions,
+            marksSecured,
+            timestamp: new Date(), // Adding a timestamp
         };
-        console.log("Test Data Submitted: ", data);
-        // You would send this data to your backend here
+
+        try {
+            // Add the data to the Firestore collection (you can specify the collection name)
+            const docRef = await addDoc(collection(db, "testData"), data);
+            console.log("Test Data Submitted with ID: ", docRef.id); // Log the document ID
+        } catch (error) {
+            console.error("Error adding document: ", error); // Log any errors
+        }
     };
 
     return (
@@ -110,6 +122,18 @@ const TestDataEntryForm = () => {
                         type="number"
                         value={skippedQuestions}
                         onChange={(e) => setSkippedQuestions(e.target.value)}
+                        min="0"
+                        required
+                        className="w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    />
+                </div>
+
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">Marks Secured</label>
+                    <input
+                        type="number"
+                        value={marksSecured}
+                        onChange={(e) => setMarksSecured(e.target.value)} // Handle manual input
                         min="0"
                         required
                         className="w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"

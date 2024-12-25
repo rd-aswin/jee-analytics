@@ -1,25 +1,22 @@
-import './App.css';
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Auth from "./pages/Auth";
-import Dashboard from "./components/Dashboard";
-import TestReminder from "./components/TestReminder";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Error from "./pages/Error";
 import DataEntryForm from "./pages/DataEntry";
-import TestDataEntryForm from "./components/TestDataEntryForm";
+import Homepage from "./pages/Homepage";
+
+
 
 function App() {
-  return (
-      <>
-        {/*<Login/>*/}
-        {/*  <Register/>*/}
-        {/*  <Auth/>*/}
-          <DataEntryForm/>
-          <TestDataEntryForm/>
-          <Dashboard/>
-          {/*<TestReminder/>*/}
+    return (
 
-      </>
-  );
+            <Routes>
+                <Route path="/">
+                    <Route index element={<Homepage />} />
+                    <Route path="dataentry" element={<DataEntryForm />} />
+                    <Route path="*" element={<Error />} />
+                </Route>
+            </Routes>
+    );
 }
 
 export default App;

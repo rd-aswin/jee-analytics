@@ -40,7 +40,7 @@ const CountdownJEE = () => {
 
     return (
         <div className="flex flex-col items-center justify-center p-6 bg-gradient-to-r from-indigo-700 via-purple-800 to-pink-900 rounded-xl shadow-2xl w-80 mx-auto">
-            <h2 className="text-3xl font-semibold text-white mb-6">JEE Main 2026</h2>
+            <h2 className="text-3xl font-semibold text-white mb-6">JEE Mains 2026</h2>
             <div className="flex flex-col space-y-6 text-center">
                 {/* Impactful Days Section */}
                 <div className="flex flex-col items-center p-4 bg-red-500 rounded-lg shadow-lg animate-pulse">
